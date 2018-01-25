@@ -15,11 +15,11 @@ app.post("/books", controller.createBookController);
 app.put("/books/:id", controller.updateBookController);
 app.delete("/books/:id", controller.deleteBookController);
 
-app.get("/books/authors", controller.authorsController);
-app.get("/books/:id/authors/:id", controller.authorsIdController);
-app.post("/books/authors", controller.createAuthorController);
-app.put("/books/:id/authors/:id", controller.updateAuthorController);
-app.delete("/books/:id/authors/:id", controller.deleteAuthorController);
+// app.get("/books/:id/authors", controller.authorsController);
+// app.get("/books/:id/authors/:id", controller.authorsIdController);
+// app.post("/books/:id/authors", controller.createAuthorController);
+// app.put("/books/:id/authors/:id", controller.updateAuthorController);
+// app.delete("/books/:id/authors/:id", controller.deleteAuthorController);
 
 app.use((req, res, next) => {
   res.status(404).json({ error: { message: 'Not found' }});
