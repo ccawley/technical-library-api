@@ -1,0 +1,16 @@
+[
+  {
+    id: uuid(),
+    name: "Redwall",
+    borrowed: false,
+    description: "Redwall Abbey, tranquil home to a community of peace-loving mice, is threatened by Cluny the Scourge savage bilge rat warlord and his battle-hardened horde. But the Redwall mice and their loyal woodland friends combine their courage and strength.",
+    authors: [{ id: uuid(), firstName: "Brian", lastName: "Jacques" }]
+  },
+  {
+    id: uuid(),
+    name: "Mossflower",
+    borrowed: false,
+    description: "The clever and greedy wildcat Tsarmina becomes ruler of all Mossflower Woods and is determined to govern the peaceful woodlanders with an iron paw. The brave mouse Martin and quick-talking mouse thief Gonff meet in the depths of Kotir Castle's dungeon. The two escape and resolve to end Tsarmina's tyrannical rule. Joined by Kinny the mole, Martin and Gonff set off on a dangerous quest for Salamandastron, where they are convinced that their only hope, Boar the Fighter, still lives.",
+    authors: [{ id: uuid(), firstName: "Brian", lastName: "Jacques" }]
+  }
+]
