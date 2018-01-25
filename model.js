@@ -13,17 +13,17 @@ function getBookById(id) {
   return book;
 }
 
-function createBook(name, borrowed, description, authors) {
-  let book = { id: uuid(), name, borrowed, description, authors };
+function createBook(name, description, authors) {
+  let book = { id: uuid(), name, borrowed: false, description, authors };
   books.push(book);
   fs.writeFileSync(filePath, books)
   return book;
 }
 
-function updateBook(id, name, borrowed, description, authors) {
+function updateBook(id, name, description, authors) {
   let book = books.find(book => book.id === id);
   book.name = name;
-  book.borrowed = borrowed;
+  book.borrowed = false;
   book.description = description;
   book.authors = authors;
   fs.writeFileSync(filePath, books)
