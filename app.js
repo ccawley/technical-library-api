@@ -15,7 +15,7 @@ app.post("/books", controller.createBookController);
 app.put("/books/:id", controller.updateBookController);
 app.delete("/books/:id", controller.deleteBookController);
 
-// app.get("/books/:id/authors", controller.authorsController);
+app.get("/books/:id/authors", controller.authorsController);
 // app.get("/books/:id/authors/:id", controller.authorsIdController);
 // app.post("/books/:id/authors", controller.createAuthorController);
 // app.put("/books/:id/authors/:id", controller.updateAuthorController);

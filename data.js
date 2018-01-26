@@ -1,4 +1,4 @@
-let uuid = require('uuid')
+let uuid = require('uuid/v4')
 let fs = require('fs')
 
 let data = [

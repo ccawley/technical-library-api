@@ -5,6 +5,11 @@ let booksController = (req, res, next) => {
   res.status(200).json(books);
 };
 
+let authorsController = (req, res, next) => {
+  let authors = model.getAllAuthors();
+  res.status(200).json(authors);
+}
+
 let booksIdController = (req, res, next) => {
   let id = req.params.id;
   let book = model.getBookById(id);
@@ -52,5 +57,10 @@ module.exports = {
   booksIdController,
   createBookController,
   updateBookController,
-  deleteBookController
+  deleteBookController,
+  authorsController,
+  // authorsIdController,
+  // createAuthorController,
+  // updateAuthorController,
+  // deleteAuthorController
 };
