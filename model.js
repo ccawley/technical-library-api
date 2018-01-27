@@ -3,22 +3,32 @@ let fs = require('fs');
 let filePath = './data.json'
 let booksInJSON = fs.readFileSync('./data.json', 'utf-8');
 let books = JSON.parse(booksInJSON);
-console.log(books)
+//console.log(books)
 
 function getAll() {
   return books
 }
 
-function getAllAuthors() {
-  let authors = books.filter()
+function getAllAuthors(bookId) {
+  let book = books.find(book => book.id === bookId)
+  let authors = book.authors
+  return authors
 }
 
-function getBookById(id) {
-  let book = books.find(book => book.id === id);
+function getBookById(bookId) {
+  let book = books.find(book => book.id === bookId);
   return book;
 }
 
 function createBook(name, description, authors) {
+  // The below pattern is super useful in flattening data but not gonna use here:
+  // let authorsInData = books.reduce((prev, book) => {
+  //   return prev.concat(book.authors)
+  // }, [])
+
+  // for author in authors (body)
+    // find author in authorsInDate
+    // if find returns undefined, error
   let book = {
     id: uuid(),
     name,
@@ -29,7 +39,7 @@ function createBook(name, description, authors) {
         id: uuid(),
         firstName: author.firstName,
         lastName: author.lastName
-      }
+      };
     })
   };
   books.push(book);
@@ -37,21 +47,37 @@ function createBook(name, description, authors) {
   return book;
 }
 
-function updateBook(id, name, description, authors) {
-  let book = books.find(book => book.id === id);
+function updateBook(bookId, name, description, authors) {
+  let book = books.find(book => book.id === bookId);
   book.name = name;
   book.borrowed = false;
   book.description = description;
-  book.authors = authors;
+  book.authors = authors.map(author => {
+    return {
+      id: uuid(),
+      firstName: author.firstName,
+      lastName: author.lastName
+    };
+  });
+  book.authors[0].id = uuid()
   fs.writeFileSync(filePath, JSON.stringify(books))
   return book;
 }
 
-function deleteBook(id) {
-  let book = books.find(book => book.id === id);
+function deleteBook(bookId) {
+  let book = books.find(book => book.id === bookId);
   let index = books.indexOf(book);
   books.splice(index, 1);
-  fs.writeFileSync(filePath, JSON.stringify(books))
+  fs.writeFileSync(filePath, JSON.stringify(books));
+  return book;
+}
+
+function deleteAuthor(bookId, authorId) {
+  let book = books.find(book => book.id === bookId);
+  let authors = book.authors;
+  let authorIndex = authors.findIndex(author => author.id === authorId);
+  book.authors.splice(authorIndex, 1);
+  fs.writeFileSync(filePath, JSON.stringify(books));
   return book;
 }
 
@@ -65,5 +91,5 @@ module.exports = {
   // getAuthorById,
   // createAuthor,
   // updateAuthor,
-  // deleteAuthor
+  deleteAuthor
 };

@@ -10,16 +10,16 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 app.get("/books", controller.booksController);
-app.get("/books/:id", controller.booksIdController);
+app.get("/books/:bookId", controller.booksIdController);
 app.post("/books", controller.createBookController);
-app.put("/books/:id", controller.updateBookController);
-app.delete("/books/:id", controller.deleteBookController);
+app.put("/books/:bookId", controller.updateBookController);
+app.delete("/books/:bookId", controller.deleteBookController);
 
-app.get("/books/:id/authors", controller.authorsController);
-// app.get("/books/:id/authors/:id", controller.authorsIdController);
-// app.post("/books/:id/authors", controller.createAuthorController);
-// app.put("/books/:id/authors/:id", controller.updateAuthorController);
-// app.delete("/books/:id/authors/:id", controller.deleteAuthorController);
+app.get("/books/:bookId/authors", controller.authorsController);
+// app.get("/books/:bookId/authors/:authorId", controller.authorsIdController);
+// app.post("/books/:bookId/authors", controller.createAuthorController);
+// app.put("/books/:bookId/authors/:authorsId", controller.updateAuthorController);
+app.delete("/books/:bookId/authors/:authorId", controller.deleteAuthorController);
 
 app.use((req, res, next) => {
   res.status(404).json({ error: { message: 'Not found' }});
