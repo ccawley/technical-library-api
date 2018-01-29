@@ -10,15 +10,15 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 app.use(bodyParser.json());
 
 app.get("/books", controller.booksController);
-app.get("/books/:bookId", controller.booksIdController);
+app.get("/books/:bookId", controller.bookIdController);
 app.post("/books", controller.createBookController);
 app.put("/books/:bookId", controller.updateBookController);
 app.delete("/books/:bookId", controller.deleteBookController);
 
 app.get("/books/:bookId/authors", controller.authorsController);
-// app.get("/books/:bookId/authors/:authorId", controller.authorsIdController);
-// app.post("/books/:bookId/authors", controller.createAuthorController);
-// app.put("/books/:bookId/authors/:authorsId", controller.updateAuthorController);
+app.get("/books/:bookId/authors/:authorId", controller.authorIdController);
+app.post("/books/:bookId/authors", controller.createAuthorController);
+app.put("/books/:bookId/authors/:authorId", controller.updateAuthorController);
 app.delete("/books/:bookId/authors/:authorId", controller.deleteAuthorController);
 
 app.use((req, res, next) => {

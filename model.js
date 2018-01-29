@@ -1,23 +1,29 @@
 let uuid = require('uuid/v4');
 let fs = require('fs');
-let filePath = './data.json'
+let filePath = './data.json';
 let booksInJSON = fs.readFileSync('./data.json', 'utf-8');
 let books = JSON.parse(booksInJSON);
-//console.log(books)
+// console.log(books);
 
 function getAll() {
-  return books
+  return books;
 }
 
 function getAllAuthors(bookId) {
-  let book = books.find(book => book.id === bookId)
-  let authors = book.authors
-  return authors
+  let book = books.find(book => book.id === bookId);
+  let authors = book.authors;
+  return authors;
 }
 
 function getBookById(bookId) {
   let book = books.find(book => book.id === bookId);
   return book;
+}
+
+function getAuthorById(bookId, authorId) {
+  let book = books.find(book => book.id === bookId);
+  let author = book.authors.find(author => author.id === authorId);
+  return author;
 }
 
 function createBook(name, description, authors) {
@@ -43,8 +49,20 @@ function createBook(name, description, authors) {
     })
   };
   books.push(book);
-  fs.writeFileSync(filePath, JSON.stringify(books))
+  fs.writeFileSync(filePath, JSON.stringify(books));
   return book;
+}
+
+function createAuthor(bookId, firstName, lastName) {
+  let book = books.find(book => book.id === bookId);
+  let newAuthor = {
+    id: uuid(),
+    firstName,
+    lastName
+  }
+  book.author.push(newAuthor);
+  fs.writeFileSync(filePath, JSON.stringify(books));
+  return newAuthor;
 }
 
 function updateBook(bookId, name, description, authors) {
@@ -62,6 +80,15 @@ function updateBook(bookId, name, description, authors) {
   book.authors[0].id = uuid()
   fs.writeFileSync(filePath, JSON.stringify(books))
   return book;
+}
+
+function updateAuthor(bookId, authorId, firstName, lastName) {
+  let book = books.find(book => book.id === bookId);
+  let author = book.authors.find(author => author.id === authorId);
+  author.firstName = firstName
+  author.lastName = lastName
+  fs.writeFileSync(filePath, JSON.stringify(books))
+  return author;
 }
 
 function deleteBook(bookId) {
@@ -88,8 +115,8 @@ module.exports = {
   updateBook,
   deleteBook,
   getAllAuthors,
-  // getAuthorById,
-  // createAuthor,
-  // updateAuthor,
+  getAuthorById,
+  createAuthor,
+  updateAuthor,
   deleteAuthor
 };
